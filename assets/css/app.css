@@ -1,0 +1,44 @@
+
+body {
+    background-color: lightgray;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 0.5rem;
+}
+
+.price-cart {
+    font-weight: bold;
+}
+
+.card-body{
+    cursor: pointer;
+    color: black;
+}
+
+.card-body:hover {
+    text-decoration: none;
+    background-color: #f8f7fc;
+}
+
+.buy-item{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    background: lightgray;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+}
+
+.title-price {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
