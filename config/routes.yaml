@@ -1,3 +1,15 @@
 index:
   path: /
   controller: App\Controller\ProductController::list
+product_show:
+  path: /product/{id}
+  controller: App\Controller\ProductController::show
+cart_show:
+  path: /cart
+  controller: App\Controller\CartController::show
+cart_add:
+  path: /cart/add/{id}
+  controller: App\Controller\CartController:add
+cart_reset:
+  path: /cart/reset
+  controller: App\Controller\CartController:reset

@@ -9,7 +9,16 @@
         {% endblock %}
     </head>
     <body>
-    <!-- ... -->
+
+    <nav class="navbar navbar-dark bg-secondary justify-content-between">
+        <a href="/" class="navbar-brand">Test</a>
+        <a href="/cart" class="btn btn-outline-light my-2 my-sm-0">Mon panier
+            {% if  app.session.get('quantities') is defined %}
+                {{ app.session.get('quantities') }}
+            {% endif %}
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </nav>
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}

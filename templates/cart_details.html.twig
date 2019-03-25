@@ -1,0 +1,28 @@
+{% include "base.html.twig" %}
+
+<div class="container-fluid pl-5 pr-5 d-flex flex-column align-items-center">
+    <h1>Mon panier</h1>
+    <div>
+        <div class="mt-4">
+            {% if products %}
+            <h5>Contenu : </h5>
+                {% for product in products %}
+                    <div class="d-flex">
+                        <div>{{ product.name }}</div>
+                        <div class="ml-3">{{ product.price }}  €</div>
+                        <div class="ml-3"> x {{ cart[product.id] }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                Votre panier est vide
+            {% endif %}
+        </div>
+        {% if products %}
+            <div class="mt-4">
+                <h5>Montant total : </h5>
+                <div>{{ total }} €</div>
+            </div>
+            <a href="/cart/reset" type="button" class="btn btn-danger mt-2">Vider le panier</a>
+        {% endif %}
+    </div>
+</div>

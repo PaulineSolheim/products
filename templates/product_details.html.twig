@@ -1,0 +1,29 @@
+{% include "base.html.twig" %}
+
+<div class="container-fluid pl-5 pr-5 d-flex flex-column align-items-center">
+    <h1>{{ product.name }}</h1>
+    <div class="d-flex  mt-3">
+        <div>
+            <h5>Description : </h5>
+            <div>{{ product.description }}</div>
+        </div>
+        <div class="ml-5">
+            <h5>Prix : </h5>
+            <div>{{ product.price }} €</div>
+        </div>
+    </div>
+    <form id="form-product" action="/cart/add/{{ product.id }}" method="POST">
+        <div class="input-group mt-3" id="quantity-buy">
+            <select name="quantity" id="quantity">
+                <option selected>Choisissez la quantité</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <input type="submit" class="btn btn-primary" value="Ajouter au panier">
+        </div>
+    </form>
+
+</div>
