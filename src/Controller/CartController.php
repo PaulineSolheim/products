@@ -27,7 +27,7 @@ class CartController extends AbstractController
             $this->session->set('cart',array());
         }
 
-        if (array_key_exists($request->get('id'), $this->cart) && $request->get('quantity')) {
+        if (array_key_exists($request->get('id'), $this->session->get('cart')) && $request->get('quantity')) {
             $this->cart[$request->get('id')] += (int)$request->get('quantity');
         } else {
             if ($request->get('quantity') != null) {
