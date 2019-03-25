@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
     {
         for($i = 0; $i < 12; $i++) {
             $product = new Product();
-            $product->setName("product-" . $i);
+            $product->setName("Product-" . $i);
             $product->setDescription("Description for product-" . $i);
             $product->setPrice(mt_rand(10, 100));
             $manager->persist($product);
