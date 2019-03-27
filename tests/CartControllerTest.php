@@ -2,22 +2,40 @@
 
 namespace App\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Controller\CartController;
+use App\Entity\Product;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 
 
-class CartControllerTest extends WebTestCase
+class CartControllerTest extends KernelTestCase
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    protected function setUp()
+    {
+        $kernel = self::bootKernel();
+
+        $this->entityManager = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+    }
+
     public function testAddItemTotalQuantity()
     {
-        $client = static::createClient();
+        $productRepository = $this->entityManager->getRepository(Product::class);
+        /** @var Product $product */
+        $product = $productRepository->findBy(["name" => "Product-1"])[0];
+        $quantity = 2;
+        $cartController = new CartController();
+        $total = $cartController->calculateTotal([
+            $product->getId() => $quantity
+        ], $productRepository);
 
-        $crawler = $client->request('GET', '/product/14'); //todo change id (1 ->12)
+        $this->assertEquals(($product->getPrice() * $quantity), $total);
 
-        $form = $crawler->selectButton('Ajouter')->form();
-        $form->setValues(['quantity' => 4]);
-        $client->submit($form);  //todo methode add cart controller jms appelee
-
-        $this->assertCount(1,  $crawler->filter('html:contains("Mon panier 4")'));
     }
 }

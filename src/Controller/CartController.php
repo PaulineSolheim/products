@@ -17,8 +17,11 @@ class CartController extends AbstractController
 
     public function __construct()
     {
-        $this->session = new Session();
-        $this->cart = $this->session->get('cart');
+        if(!headers_sent())
+        {
+            $this->session = new Session();
+            $this->cart = $this->session->get('cart');
+        }
     }
 
     public function add(Request $request)
@@ -71,6 +74,7 @@ class CartController extends AbstractController
                 $total += ($product->getPrice() * $this->cart[$product->getId()]);
             }
         }
+        $total = $this->calculateTotal($this->cart, $productRepository);
 
         return $this->render('cart_details.html.twig', [
             'cart'=> $this->cart,
@@ -79,6 +83,19 @@ class CartController extends AbstractController
         ],
             new Response("", 200)
         );
+    }
+
+    public function calculateTotal($cart, $productRepository) {
+        $total = 0;
+
+        if ($cart) {
+            foreach ($cart as $key => $value) {
+                $product = $productRepository->find($key);
+                $total += ($product->getPrice() * $cart[$product->getId()]);
+            }
+        }
+
+        return $total;
     }
 
     public function reset()
