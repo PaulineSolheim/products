@@ -4,16 +4,14 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
-
 class ProductControllerTest extends WebTestCase
 {
     public function setUp()
     {
         self::bootKernel();
-
     }
-        public function testList()
+
+    public function testList()
     {
         $client = static::createClient(
             array(
